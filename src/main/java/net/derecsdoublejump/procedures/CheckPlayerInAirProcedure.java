@@ -6,6 +6,7 @@ import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.IWorld;
 import net.minecraft.world.GameType;
+import net.minecraft.world.Difficulty;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.ResourceLocation;
@@ -93,7 +94,7 @@ public class CheckPlayerInAirProcedure {
 							}
 						}
 						entity.getPersistentData().putBoolean("hasDoubleJumped", (true));
-						if (new Object() {
+						if (!(world.getDifficulty() == Difficulty.PEACEFUL) && (new Object() {
 							public boolean checkGamemode(Entity _ent) {
 								if (_ent instanceof ServerPlayerEntity) {
 									return ((ServerPlayerEntity) _ent).interactionManager.getGameType() == GameType.SURVIVAL;
@@ -113,7 +114,7 @@ public class CheckPlayerInAirProcedure {
 								}
 								return false;
 							}
-						}.checkGamemode(entity)) {
+						}.checkGamemode(entity))) {
 							if (((entity instanceof PlayerEntity) ? ((PlayerEntity) entity).getFoodStats().getSaturationLevel() : 0) >= 1) {
 								if (entity instanceof PlayerEntity) {
 									ObfuscationReflectionHelper.setPrivateValue(FoodStats.class, ((PlayerEntity) entity).getFoodStats(),
