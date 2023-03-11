@@ -74,8 +74,9 @@ public class CheckPlayerInAirProcedure {
 						return false;
 					}
 				}.checkGamemode(entity))) {
-					if (((entity instanceof PlayerEntity) ? ((PlayerEntity) entity).getFoodStats().getFoodLevel() : 0) >= 7) {
+					if (((entity instanceof PlayerEntity) ? ((PlayerEntity) entity).getFoodStats().getFoodLevel() : 0) >= DerecsDoubleJumpModVariables.MapVariables.get(world).jumpCost) {
 						entity.setMotion((entity.getMotion().getX()), 0.5, (entity.getMotion().getZ()));
+						entity.fallDistance = (float) (5);
 						if (DerecsDoubleJumpModVariables.MapVariables.get(world).doParticles) {
 							loop = 0;
 							particleAmount = 8;
